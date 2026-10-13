@@ -5,7 +5,7 @@ const apiBaseURL =
   import.meta.env.VITE_API_BASE_URL ||
   (import.meta.env.DEV
     ? "http://127.0.0.1:8000/api"
-    : "https://learnova-jytp.onrender.com/api");
+    : "https://learnova-2-n4rr.onrender.com/api");
 
 const api = axios.create({
   baseURL: apiBaseURL,
