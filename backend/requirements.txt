@@ -5,3 +5,4 @@ django-cors-headers
 mysqlclient
 gunicorn
 whitenoise
+PyMySQL
