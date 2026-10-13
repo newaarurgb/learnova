@@ -62,6 +62,11 @@ function Navbar({ user, onLogout }) {
 
       <nav className={menuOpen ? "nav-links open" : "nav-links"}>
         <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+        {!user && (
+          <Link className="nav-mobile-login" to="/login" onClick={() => setMenuOpen(false)}>
+            Sign in
+          </Link>
+        )}
         {user?.role === "trainer" ? (
           <>
             <Link to="/trainer#my-teachings" onClick={() => setMenuOpen(false)}>My teachings</Link>

@@ -139,6 +139,7 @@ button:focus-visible, a:focus-visible {
 }
 
 .nav-links a:hover, .login-link:hover { color: white; }
+.nav-mobile-login { display: none; }
 
 .nav-actions { gap: 20px; }
 
@@ -1437,7 +1438,8 @@ button:focus-visible, a:focus-visible {
 .footer > .brand, .footer > p, .footer > .footer-copy { align-self: center; }
 
 @media (max-width: 900px) {
-  .community-layout { grid-template-columns: minmax(250px, .85fr) minmax(0, 1.15fr); gap: 16px; }
+  .community-layout { grid-template-columns: 1fr; gap: 22px; }
+  .community-compose { position: static; }
   .community-compose { padding: 18px; }
   .footer-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -1472,4 +1474,195 @@ button:focus-visible, a:focus-visible {
   .footer-review-form { grid-template-columns: 1fr; }
   .footer-review-form > .review-stars { justify-self: start; }
   .footer-review-form label, .footer-review-form textarea { grid-column: 1; }
+}
+
+@media (max-width: 760px) {
+  .nav-links .nav-mobile-login {
+    display: block;
+    border-top: 1px solid var(--border);
+    color: var(--cyan);
+  }
+
+  .hero {
+    min-height: 0;
+  }
+
+  .learning-page,
+  .features-page,
+  .community-page,
+  .trainer-workspace {
+    width: calc(100% - 32px);
+  }
+
+  .dashboard-stats {
+    flex-wrap: wrap;
+  }
+
+  .trainer-panel-heading > div,
+  .trainer-item-card > div,
+  .shared-resource-heading > div {
+    min-width: 0;
+  }
+
+  .trainer-form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .trainer-submit,
+  .community-submit,
+  .footer-review-form > .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-visual {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .hero-visual .floating-label {
+    position: relative;
+    inset: auto;
+    width: min(100%, 365px);
+    white-space: normal;
+  }
+
+  .floating-label strong,
+  .floating-label small {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-visual .learning-card {
+    width: min(100%, 365px);
+    transform: none;
+  }
+
+  .hero-visual .learning-card:hover {
+    transform: none;
+  }
+
+  .learning-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .learning-section-heading,
+  .features-detail-heading,
+  .community-feed-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .learning-section-heading .text-link {
+    white-space: normal;
+  }
+
+  .saved-lessons a {
+    flex-wrap: wrap;
+  }
+
+  .saved-lessons a span {
+    flex-basis: 100%;
+    margin-left: 29px;
+  }
+
+  .lesson-list {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-title-row {
+    min-width: 0;
+  }
+
+  .lesson-title-row h1 {
+    overflow-wrap: anywhere;
+  }
+
+  .notes-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .community-post-meta {
+    align-items: flex-start;
+  }
+
+  .community-replies-toggle {
+    min-height: 36px;
+  }
+
+  .doubt-card-top {
+    flex-direction: column;
+  }
+
+  .doubt-status {
+    align-self: flex-start;
+  }
+
+  .trainer-doubt-actions .button,
+  .community-type {
+    min-height: 44px;
+  }
+
+  .footer-review-form {
+    min-width: 0;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .navbar {
+    padding-right: 10px;
+    padding-left: 10px;
+    gap: 5px;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .nav-actions .login-link {
+    display: none;
+  }
+
+  .nav-cta {
+    min-height: 38px;
+    padding: 0 9px;
+    gap: 5px;
+  }
+
+  .learning-page,
+  .features-page,
+  .community-page,
+  .trainer-workspace {
+    width: calc(100% - 24px);
+  }
+
+  .community-compose,
+  .doubt-card,
+  .trainer-doubt-card {
+    padding: 14px;
+  }
+
+  .footer-reviews {
+    padding: 15px;
+  }
+
+  .review-stars.interactive button {
+    width: 31px;
+    height: 36px;
+  }
 }
