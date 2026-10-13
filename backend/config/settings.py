@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-=xh6_^jj8c3_5@f&i&^r9a11*^79u)3zmps7!7rd7ho%u7it5f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+     "learnova-jytp.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
