@@ -29,7 +29,7 @@ if is_render and not SECRET_KEY:
 SECRET_KEY = SECRET_KEY or "django-insecure-local-development-only"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
+DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() == "true"
 
 def environment_list(name):
     return [
