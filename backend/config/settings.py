@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 
+from django.core.exceptions import ImproperlyConfigured
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,17 +22,32 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=xh6_^jj8c3_5@f&i&^r9a11*^79u)3zmps7!7rd7ho%u7it5f'
+is_render = bool(os.environ.get("RENDER") or os.environ.get("RENDER_EXTERNAL_HOSTNAME"))
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+if is_render and not SECRET_KEY:
+    raise ImproperlyConfigured("Set DJANGO_SECRET_KEY in the Render environment.")
+SECRET_KEY = SECRET_KEY or "django-insecure-local-development-only"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DJANGO_DEBUG", "false").lower() == "true"
+
+def environment_list(name):
+    return [
+        value.strip().rstrip("/")
+        for value in os.environ.get(name, "").split(",")
+        if value.strip()
+    ]
+
 
 ALLOWED_HOSTS = [
-     "learnova-jytp.onrender.com",
+    "learnova-jytp.onrender.com",
     "localhost",
     "127.0.0.1",
+    *environment_list("DJANGO_ALLOWED_HOSTS"),
 ]
+render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if render_hostname:
+    ALLOWED_HOSTS.append(render_hostname)
 
 
 # Application definition
@@ -64,6 +81,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    *environment_list("FRONTEND_ORIGINS"),
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
