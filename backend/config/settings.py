@@ -102,15 +102,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 DATABASES = {
-    "default": {
+     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "learnova_db",
-        "USER": "learnova_app",
-        "PASSWORD": "ChangeThis_StrongPassword_2026!",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT", "3306"),
         "OPTIONS": {
-            "charset": "utf8mb4",
+            "ssl": {},
         },
     }
 }
