@@ -70,13 +70,37 @@ export default function Register() {
       setMessage("Account created successfully. You can now sign in.");
     } catch (requestError) {
       const responseData = requestError.response?.data;
-      const apiErrors = responseData
-        ? Object.values(responseData)
-            .flat()
-            .filter((value) => typeof value === "string")
-            .join(" ")
-        : "";
-      setError(apiErrors || "Registration failed. Please try again.");
+
+console.error("Registration error:", {
+  message: requestError.message,
+  status: requestError.response?.status,
+  data: responseData,
+  url: requestError.config?.url,
+  baseURL: requestError.config?.baseURL,
+});
+
+const apiErrors = responseData
+  ? Object.entries(responseData)
+      .map(([field, value]) => {
+        const details = Array.isArray(value)
+          ? value.join(" ")
+          : typeof value === "string"
+            ? value
+            : JSON.stringify(value);
+
+        return `${field}: ${details}`;
+      })
+      .join(" | ")
+  : "";
+
+setError(
+  apiErrors ||
+    `Registration failed${
+      requestError.response?.status
+        ? ` (HTTP ${requestError.response.status})`
+        : ""
+    }. Check the browser console for details.`
+);
     } finally {
       setLoading(false);
     }
