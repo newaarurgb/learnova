@@ -6,3 +6,4 @@ mysqlclient
 gunicorn
 whitenoise
 PyMySQL
+python-dotenv
